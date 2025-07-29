@@ -20,8 +20,7 @@ namespace Pizzaria.Controllers
             var pedido = _context.pizzapedido.FirstOrDefault(p => p.Id == id);
             if (pedido == null) return NotFound($"Pedido com ID {id} não foi encontrado.");
             return Ok(pedido);
-        }
-        
+        }       
         [HttpPost("Pedidos")]
         public IActionResult CriarPedido([FromBody] Pedido pedido)
         {
@@ -34,8 +33,6 @@ namespace Pizzaria.Controllers
             if (pizzas == null)
                 return BadRequest("Pizza não encontrada.");
             
-
-
             
             var ValorTotal = pizzas.preco * pedido.Quantidade;
             var novoPedido = new Pedido
@@ -47,8 +44,7 @@ namespace Pizzaria.Controllers
                 Endereço = pedido.Endereço,
                 ValorTotal = pedido.Quantidade * pizzas.preco
             };
-            
-          
+                      
             _context.pizzapedido.Add(novoPedido);
             _context.SaveChanges();
 

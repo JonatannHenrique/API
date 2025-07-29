@@ -22,7 +22,6 @@ namespace Pizzaria.Controllers
             if (cliente == null)
                 return Unauthorized("Email ou senha incorretos.");
 
-            //_context.Clientes.Add(cliente);
             _context.SaveChanges();
 
             return Ok(new

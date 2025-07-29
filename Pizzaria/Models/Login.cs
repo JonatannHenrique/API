@@ -4,9 +4,6 @@ using System.Text.Json.Serialization;
 namespace Pizzaria.Models;
 public class Login 
 {
-    [Key]
-    [JsonIgnore]
-    public ulong Id { get; set; }
     public string? Email { get; set; }
     public string? Senha { get; set; }
 

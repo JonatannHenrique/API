@@ -7,7 +7,6 @@ public class Pedido
     public string? Endereço { get; set; }
     [JsonIgnore]
     public DateTime Data { get; set; }
-
     public int Quantidade { get; set; }
     [JsonIgnore]
     public decimal ValorTotal { get; set; }

@@ -20,7 +20,6 @@ namespace Pizzaria.Controllers
 
             _context.Clientes.Add(cliente);
             _context.SaveChanges();
-
             
             return Ok(new
             {
@@ -30,12 +29,5 @@ namespace Pizzaria.Controllers
                 cliente.Email
             });
         }
-
-        //[HttpGet("{id}")]
-        //public async Cadastro GetById (ulong id)
-        //{
-        //   var cliente =  _context.Clientes.Find(id);           
-        //    return Ok(cliente);
-        //}
     }
 }

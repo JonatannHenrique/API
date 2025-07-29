@@ -7,7 +7,6 @@ public class AppDbContext : DbContext
 
     public DbSet<Pizza> pizzas { get; set; }
     public DbSet<Cadastro> Clientes { get; set; }
-    public DbSet<Login> Logins { get; set; }
     public DbSet<Pedido> pizzapedido { get; set; }
     public object Pedido { get; internal set; }
     public object Pizza { get; internal set; }
