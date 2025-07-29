@@ -1,10 +1,8 @@
-﻿namespace Pizzaria.Models
-{
+﻿
     public class Pizza
     {
-        public int PizzaId { get; set; }
-        public decimal ValorTotal { get; set; }
-        public int Id { get; internal set; }
-    }
-}
 
+        public int Id { get; private set; }
+        public decimal preco { get; set; }
+        
+    }

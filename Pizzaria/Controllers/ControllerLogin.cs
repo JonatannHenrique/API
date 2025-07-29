@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MySqlX.XDevAPI;
 using Pizzaria.Controllers;
-
+using Pizzaria.Models;
 
 namespace Pizzaria.Controllers
 {
@@ -22,12 +22,14 @@ namespace Pizzaria.Controllers
             if (cliente == null)
                 return Unauthorized("Email ou senha incorretos.");
 
+            //_context.Clientes.Add(cliente);
+            _context.SaveChanges();
+
             return Ok(new
             {
                 message = "Login bem-sucedido!",
-                cliente.Id,
-                cliente.Nome,
-                cliente.Email
+                cliente.Email,
+                cliente.Senha
             });
         }
     }

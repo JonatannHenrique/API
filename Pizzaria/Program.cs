@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.EntityFrameworkCore;
 using Pizzaria.Controllers;
+using Pizzaria.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

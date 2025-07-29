@@ -1,13 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Swashbuckle.AspNetCore.Annotations;
 using System.Text.Json.Serialization;
 
 namespace Pizzaria.Models;
-public class Login 
+public class Cadastro
 {
-    [Key]
     [JsonIgnore]
     public ulong Id { get; set; }
+    public string? Nome { get; set; }
     public string? Email { get; set; }
     public string? Senha { get; set; }
-
+    public int? Telefone { get; set; }
 }

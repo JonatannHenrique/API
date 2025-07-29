@@ -1,15 +1,13 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MySqlX.XDevAPI;
-using Pizzaria.Controllers;
+using Pizzaria.Models;
 namespace Pizzaria.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ControllerCadastro : ControllerBase
+    public class CadastroController : ControllerBase
     {
         private readonly AppDbContext _context;
-        public ControllerCadastro(AppDbContext context) { _context = context; }
+        public CadastroController(AppDbContext context) { _context = context; }
 
         [HttpGet]
         public IActionResult Get() => Ok(_context.Clientes.ToList());
@@ -33,12 +31,11 @@ namespace Pizzaria.Controllers
             });
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            var cliente = _context.Clientes.Find(id);
-            if (cliente == null) return NotFound();
-            return Ok(cliente);
-        }
+        //[HttpGet("{id}")]
+        //public async Cadastro GetById (ulong id)
+        //{
+        //   var cliente =  _context.Clientes.Find(id);           
+        //    return Ok(cliente);
+        //}
     }
 }
