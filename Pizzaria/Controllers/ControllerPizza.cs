@@ -37,7 +37,7 @@ namespace Pizzaria.Controllers
                 PizzaId = pedido.PizzaId,
                 Quantidade = pedido.Quantidade,
                 Data = pedido.Data = DateTime.Now,
-                Endereço = pedido.Endereço,
+                Endereco = pedido.Endereco,
                 ValorTotal = pedido.Quantidade * pizzas.preco
             };
                       
