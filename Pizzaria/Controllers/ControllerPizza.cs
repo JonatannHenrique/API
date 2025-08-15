@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Pizzaria.Models;
 
-
 namespace Pizzaria.Controllers
 {
     [ApiController]
@@ -15,7 +14,6 @@ namespace Pizzaria.Controllers
         [HttpGet("{id}")]
         public IActionResult GetPedidoPorId(int id)
         {
-
             var pizza = _context.pizzapedido.FirstOrDefault(p => p.Id == id);
             var pedido = _context.pizzapedido.FirstOrDefault(p => p.Id == id);
             if (pedido == null) return NotFound($"Pedido com ID {id} não foi encontrado.");
@@ -32,12 +30,10 @@ namespace Pizzaria.Controllers
             var pizzas = _context.pizzas.FirstOrDefault(p => p.Id == pedido.PizzaId);
             if (pizzas == null)
                 return BadRequest("Pizza não encontrada.");
-            
-            
+                        
             var ValorTotal = pizzas.preco * pedido.Quantidade;
             var novoPedido = new Pedido
-            {
-                
+            {                
                 PizzaId = pedido.PizzaId,
                 Quantidade = pedido.Quantidade,
                 Data = pedido.Data = DateTime.Now,
