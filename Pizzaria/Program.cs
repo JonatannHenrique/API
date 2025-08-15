@@ -17,6 +17,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 );
 
 var app = builder.Build();
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+app.Urls.Add($"http://*:{port}");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
