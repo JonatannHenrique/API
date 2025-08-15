@@ -1,15 +1,17 @@
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+# Build da aplicação
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-# copiar o csproj da subpasta
-COPY Pizzaria/Pizzaria.csproj ./ 
+# Copiar csproj da subpasta
+COPY Pizzaria/Pizzaria.csproj ./
 RUN dotnet restore
 
-# copiar todo o código da subpasta
+# Copiar todo o código
 COPY Pizzaria/. ./
 RUN dotnet publish -c Release -o out
 
-FROM mcr.microsoft.com/dotnet/aspnet:7.0
+# Imagem final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /app/out .
 EXPOSE 10000
