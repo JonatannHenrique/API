@@ -3,10 +3,9 @@ using Pizzaria.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Adiciona serviços para controllers
 builder.Services.AddControllers();
 
-// Swagger (documentação da API, só pra dev)
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -18,7 +17,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     )
 );
 
-// Configura CORS para aceitar qualquer origem (teste local e online)
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("PermitirTudo",
@@ -29,15 +28,14 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Configura porta dinâmica para Render ou default 5000
 var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
 app.Urls.Add($"http://*:{port}");
 
-// MIDDLEWARES - Ordem Importante
-app.UseHttpsRedirection();      // Redireciona para HTTPS
-app.UseRouting();               // Necessário antes do UseCors e MapControllers
-app.UseCors("PermitirTudo");    // CORS ativado
-app.UseAuthorization();         // Autorização (caso use)
+
+app.UseHttpsRedirection();     
+app.UseRouting();               
+app.UseCors("PermitirTudo");    
+app.UseAuthorization();         
 
 if (app.Environment.IsDevelopment())
 {
@@ -46,7 +44,7 @@ if (app.Environment.IsDevelopment())
 }
 
 // Rotas
-app.MapControllers();           // Mapeia os endpoints dos controllers
-app.MapGet("/", () => "API ONLINE! ✅"); // Teste rápido
+app.MapControllers();          
+app.MapGet("/", () => "API ONLINE! ✅"); 
 
 app.Run();
