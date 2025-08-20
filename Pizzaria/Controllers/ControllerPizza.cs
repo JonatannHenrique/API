@@ -14,8 +14,8 @@ namespace Pizzaria.Controllers
         [HttpGet("{id}")]
         public IActionResult GetPedidoPorId(int id)
         {
-            var pizza = _context.pizzapedido.FirstOrDefault(p => p.Id == id);
-            var pedido = _context.pizzapedido.FirstOrDefault(p => p.Id == id);
+            var pizza = _context.Pedidos.FirstOrDefault(p => p.Id == id);
+            var pedido = _context.Pedidos.FirstOrDefault(p => p.Id == id);
             if (pedido == null) return NotFound($"Pedido com ID {id} não foi encontrado.");
             return Ok(pedido);
         }       
@@ -27,7 +27,7 @@ namespace Pizzaria.Controllers
             if (pedido.Quantidade == 0)
                 return BadRequest("Quantidade inválida. A quantidade Deve ser maior que zero.");
 
-            var pizzas = _context.pizzas.FirstOrDefault(p => p.Id == pedido.PizzaId);
+            var pizzas = _context.Pizzas.FirstOrDefault(p => p.Id == pedido.PizzaId);
             if (pizzas == null)
                 return BadRequest("Pizza não encontrada.");
                         
@@ -41,7 +41,7 @@ namespace Pizzaria.Controllers
                 ValorTotal = pedido.Quantidade * pizzas.preco
             };
                       
-            _context.pizzapedido.Add(novoPedido);
+            _context.Pedidos.Add(novoPedido);
             _context.SaveChanges();
 
             return Ok(new
