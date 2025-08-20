@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Pizzaria.Models;
 namespace Pizzaria.Controllers
 {
@@ -16,11 +16,11 @@ namespace Pizzaria.Controllers
         public IActionResult Post([FromBody] Cadastro cliente)
         {
             if (_context.Clientes.Any(c => c.Email == cliente.Email))
-                return BadRequest("Email j� cadastrado.");
+                return BadRequest("Email já cadastrado.");
 
             _context.Clientes.Add(cliente);
             _context.SaveChanges();
-            
+
             return Ok(new
             {
                 message = "Cadastro bem sucedido",
