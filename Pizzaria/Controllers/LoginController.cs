@@ -1,17 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using MySqlX.XDevAPI;
-using Pizzaria.Controllers;
+﻿using Microsoft.AspNetCore.Mvc;
 using Pizzaria.Models;
 
 namespace Pizzaria.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ControllerLogin : ControllerBase
+    public class LoginController : ControllerBase
     {
         private readonly AppDbContext _context;
-        public ControllerLogin(AppDbContext context) { _context = context; }
+        public LoginController(AppDbContext context) { _context = context; }
 
         [HttpPost]
         public IActionResult Login([FromBody] Login login)

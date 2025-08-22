@@ -5,11 +5,11 @@ namespace Pizzaria.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ControllerPedido : ControllerBase
+    public class PedidoController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public ControllerPedido(AppDbContext context) { _context = context; }
+        public PedidoController(AppDbContext context) { _context = context; }
 
         [HttpGet("{id}")]
         public IActionResult GetPedidoPorId(int id)
