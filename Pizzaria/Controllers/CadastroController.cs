@@ -23,10 +23,7 @@ namespace Pizzaria.Controllers
 
             return Ok(new
             {
-                message = "Cadastro bem sucedido",
-                cliente.Id,
-                cliente.Nome,
-                cliente.Email
+                message = "Cadastro bem sucedido",               
             });
         }
     }

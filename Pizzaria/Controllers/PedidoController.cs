@@ -10,15 +10,7 @@ namespace Pizzaria.Controllers
         private readonly AppDbContext _context;
 
         public PedidoController(AppDbContext context) { _context = context; }
-
-        [HttpGet("{id}")]
-        public IActionResult GetPedidoPorId(int id)
-        {
-            var pizza = _context.Pedidos.FirstOrDefault(p => p.Id == id);
-            var pedido = _context.Pedidos.FirstOrDefault(p => p.Id == id);
-            if (pedido == null) return NotFound($"Pedido com ID {id} não foi encontrado.");
-            return Ok(pedido);
-        }       
+     
         [HttpPost("Pedidos")]
         public IActionResult CriarPedido([FromBody] Pedido pedido)
         {
