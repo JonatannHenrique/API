@@ -8,23 +8,25 @@ namespace Pizzaria.Controllers
     {
         private readonly AppDbContext _context;
         public CadastroController(AppDbContext context) { _context = context; }
-
         [HttpGet]
         public IActionResult Get() => Ok(_context.Clientes.ToList());
-
         [HttpPost]
-        public IActionResult Post([FromBody] Cadastro cliente)
+        public IActionResult GetCadastrarUsuario([FromBody] Cadastro clientes)
         {
-            if (_context.Clientes.Any(c => c.Email == cliente.Email))
-                return BadRequest("Email já cadastrado.");
+            if (_context.Clientes.Any(c => c.Email == clientes.Email))
+            {               
+                return BadRequest("Email Já está sendo usado. ");
+            }
 
-            _context.Clientes.Add(cliente);
+
+            _context.Clientes.Add(clientes);
             _context.SaveChanges();
-
             return Ok(new
             {
-                message = "Cadastro bem sucedido",               
+                message = "Cadastro Feito"
             });
         }
+
+
     }
 }

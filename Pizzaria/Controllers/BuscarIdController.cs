@@ -2,10 +2,11 @@
 using Microsoft.EntityFrameworkCore; // Microsoft.EntityFrameworkCore é para interagir com banco de dados usando Entity Framework Core que tbm tras alguns recursos nessesarios para contruir uma web Apis
 using Pizzaria.Models; // Pizzaria.Models é o namespace onde estão os modelos de dados da aplicação, como Cadastro, Pizza, Pedido, etc...
 
-namespace ControllerBuscarId
+namespace BuscarIdController
 {
+
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UsuariosController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -14,28 +15,27 @@ namespace ControllerBuscarId
             _context = context;
         }
         [HttpGet("BuscarPorNome")]
-        public IActionResult BuscaPorNome(string nome)
+        public Cadastro BuscaPorNome(string Nome)
         {
-            var usuario = _context.Clientes.FirstOrDefault(u => u.Nome == nome);
+            var usuario = _context.Clientes
+                .FirstOrDefault(u => u.Nome.Contains(Nome));
 
             if (usuario == null)
             {
-                return NotFound(new { message = "User not found." });
+                throw new Exception("User not found.");
             }
-            return Ok(usuario);
+            return usuario;
         }
         [HttpGet("BuscarPorId")]
-        public IActionResult BuscarPorId(int id)
+        public IActionResult BuscarPorId(ulong id)
         {
             var Usuario = _context.Clientes.FirstOrDefault(u => u.Id == (ulong)id);
-            if(Usuario == null )
+            if (Usuario == null)
             {
                 return NotFound(new { message = "User Not found. " });
             }
             return Ok(Usuario);
         }
-
-       
 
     }
 }

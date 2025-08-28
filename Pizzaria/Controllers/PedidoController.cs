@@ -10,36 +10,30 @@ namespace Pizzaria.Controllers
         private readonly AppDbContext _context;
 
         public PedidoController(AppDbContext context) { _context = context; }
-     
-        [HttpPost("Pedidos")]
-        public IActionResult CriarPedido([FromBody] Pedido pedido)
+
+        [HttpGet("pedidos")]
+        public IActionResult GetTodosPedidos() //  Retorna todos os pedidos em Json 
         {
-            if (pedido == null || pedido.PizzaId == 0 || pedido.PizzaId >= 11)
-                return BadRequest("Pedido inválido. Verifique Se A Pizza Selecionada Esta Disponivel!");
-            if (pedido.Quantidade == 0)
-                return BadRequest("Quantidade inválida. A quantidade Deve ser maior que zero.");
+            var pedidos = _context.Pedidos.ToList();
+            return Ok(pedidos);
+        }
 
-            var pizzas = _context.Pizzas.FirstOrDefault(p => p.Id == pedido.PizzaId);
-            if (pizzas == null)
-                return BadRequest("Pizza não encontrada.");
-                        
-            var ValorTotal = pizzas.preco * pedido.Quantidade;
-            var novoPedido = new Pedido
-            {                
-                PizzaId = pedido.PizzaId,
-                Quantidade = pedido.Quantidade,
-                Data = pedido.Data = DateTime.Now,
-                Endereco = pedido.Endereco,
-                ValorTotal = pedido.Quantidade * pizzas.preco
-            };
-                      
-            _context.Pedidos.Add(novoPedido);
-            _context.SaveChanges();
+        [HttpGet("PedidoPorId")]
+        public IActionResult GetPedidosPorId(int Id) //  retorna quem fez o pedido e oq pediu 
+        {
+            var pedidos = _context.Pedidos
+                .Where(p => p.Id == Id)
+                .ToList();
+            return Ok(pedidos);
+        }
 
-            return Ok(new
-            {             
-                message = "pedido Feito, Aguarde",
-            });
+        [HttpGet("PedidoPorNome")]
+        public IActionResult GetBuscarPedidoPorNome(int PizzaId)
+        {
+            var pedidos = _context.Pedidos
+                .Where(p => p.PizzaId == PizzaId)
+                .ToList();
+            return Ok(pedidos);
         }
     }
 }

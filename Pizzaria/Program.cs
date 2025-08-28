@@ -15,8 +15,19 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
     )
 );
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PermitirTudo",
+        policy => policy.AllowAnyOrigin()  
+                        .AllowAnyMethod() 
+                        .AllowAnyHeader());
+});
 
+
+
+builder.Services.AddControllers();
 var app = builder.Build();
+app.UseCors("PermitirTudo");
 app.UseHttpsRedirection();      
 app.UseAuthorization();         
 if (app.Environment.IsDevelopment())
@@ -25,8 +36,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Rotas
+app.UseAuthorization();
 app.MapControllers();          
 app.MapGet("/", () => "API ONLINE! ✅"); 
 
-app.Run();
+ app.Run();
