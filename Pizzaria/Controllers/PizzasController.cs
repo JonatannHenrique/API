@@ -1,17 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Pizzaria.Models;
 
-//namespace minhaapi.controllers
-//{
-//    //[ApiController]
-//    //[Route("[controller]")]
-//    //public class Controllerpizza : ControllerBase
-//    //{
-//    //    private readonly AppDbContext _context;
-//    //    public Controllerpizza(AppDbContext context)
-//    //    {
-//    //        _context = context;
-//    //    }       
-//    //}
-//}
+[ApiController]
+[Route("api/[controller]")]
+public class PizzasController : ControllerBase
+{
+    private readonly AppDbContext _context;
+    public PizzasController(AppDbContext context) { _context = context; }
+
+    [HttpGet("ListarPizzas")]
+    public IActionResult GetTodasPizzas()
+    {
+        var pizzas = _context.Pizzas.ToList();
+        return Ok(pizzas);
+    }
+
+
+}

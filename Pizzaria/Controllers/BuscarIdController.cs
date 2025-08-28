@@ -15,27 +15,26 @@ namespace BuscarIdController
             _context = context;
         }
         [HttpGet("BuscarPorNome")]
-        public Cadastro BuscaPorNome(string Nome)
+        public IActionResult BuscaPorNome(string Nome)
         {
-            var usuario = _context.Clientes
-                .FirstOrDefault(u => u.Nome.Contains(Nome));
-
-            if (usuario == null)
+            var busca = _context.Clientes.FirstOrDefault(u => u.Nome == Nome);
+            if (busca == null)
             {
-                throw new Exception("User not found.");
+                return BadRequest($"Erro! Usuario ({Nome}) não foi encontrado");
             }
-            return usuario;
+
+            return Ok(busca);
         }
+
         [HttpGet("BuscarPorId")]
         public IActionResult BuscarPorId(ulong id)
         {
-            var Usuario = _context.Clientes.FirstOrDefault(u => u.Id == (ulong)id);
-            if (Usuario == null)
+            var busca = _context.Clientes.FirstOrDefault(b => b.Id == id);
+            if (busca == null)
             {
-                return NotFound(new { message = "User Not found. " });
+                return BadRequest($"Erro! Usuario com o Id ({id}) não foi encontrado");
             }
-            return Ok(Usuario);
+            return Ok(busca);
         }
-
     }
 }

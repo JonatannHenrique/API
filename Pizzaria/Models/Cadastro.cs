@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-
 namespace Pizzaria.Models;
 public class Cadastro
 {

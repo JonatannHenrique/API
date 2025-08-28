@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Pizzaria.Models;
+
 namespace Pizzaria.Controllers
 {
     [ApiController]
@@ -11,10 +13,10 @@ namespace Pizzaria.Controllers
         [HttpGet]
         public IActionResult Get() => Ok(_context.Clientes.ToList());
         [HttpPost]
-        public IActionResult GetCadastrarUsuario([FromBody] Cadastro clientes)
+        public IActionResult PostCadastrarUsuario([FromBody] Cadastro clientes)
         {
             if (_context.Clientes.Any(c => c.Email == clientes.Email))
-            {               
+            {
                 return BadRequest("Email Já está sendo usado. ");
             }
 
@@ -25,8 +27,6 @@ namespace Pizzaria.Controllers
             {
                 message = "Cadastro Feito"
             });
-        }
-
-
+        }      
     }
 }

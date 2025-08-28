@@ -18,7 +18,7 @@ namespace Pizzaria.Controllers
                 .FirstOrDefault(u => u.Email == Email && u.Senha == Senha);
             if (usuarios == null)
                 {
-                return NotFound(new { message = "Usuário ou senha incorretos." });
+                return BadRequest($"o Email ou a senha estão incorretas ");
             }
             return Ok(usuarios);
         }
