@@ -10,21 +10,27 @@ namespace BuscarIdController
     public class UsuariosController : ControllerBase
     {
         private readonly AppDbContext _context;
+
         public UsuariosController(AppDbContext context)
         {
             _context = context;
         }
-        [HttpGet("BuscarPorNome")]
-        public IActionResult BuscaPorNome(string Nome)
-        {
-            var busca = _context.Clientes.FirstOrDefault(u => u.Nome == Nome);
-            if (busca == null)
-            {
-                return BadRequest($"Erro! Usuario ({Nome}) não foi encontrado");
-            }
 
-            return Ok(busca);
+        [HttpGet("BuscarPorNome")]
+        public IActionResult BuscarPorNome(string nome)
+        {
+            if (string.IsNullOrWhiteSpace(nome))
+                return BadRequest("O nome não pode estar vazio.");
+
+            var usuario = _context.Clientes
+                .FirstOrDefault(u => u.Nome.ToLower() == nome.ToLower());
+
+            if (usuario == null)
+                return NotFound($"Usuário '{nome}' não foi encontrado.");
+
+            return Ok(usuario);
         }
+
 
         [HttpGet("BuscarPorId")]
         public IActionResult BuscarPorId(ulong id)
