@@ -13,7 +13,7 @@ namespace Pizzaria.Controllers
         [HttpGet]
         public IActionResult Get() => Ok(_context.Clientes.ToList());
         [HttpPost]
-        public IActionResult PostCadastrarUsuario([FromBody] Cadastro clientes)
+        public IActionResult CadastrarUsuario([FromBody] Cadastro clientes)
         {
             if (_context.Clientes.Any(c => c.Email == clientes.Email))
             {
