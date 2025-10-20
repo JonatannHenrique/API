@@ -34,12 +34,12 @@ namespace Pizzaria.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public IActionResult GetById(ulong id)
         {
             var usuarios = _context.Clientes.Find(id);
             if (usuarios == null)
             {
-                return BadRequest($"O ID: {id} não foi encontrado!");
+                return BadRequest($"O Id: {id} não foi encontrado!");
             }
             return Ok(new
             {
